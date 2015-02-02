@@ -1,10 +1,11 @@
 from django.db import models
 
 # Create your models here.
-class Stages(models.Model):
+class Venue(models.Model):
     id = models.AutoField(primary_key=True)
-    stage = models.CharField(max_length=50)
-    description = models.TextField()
+    building_name = models.CharField(max_length=50)
+    stage_name = models.CharField(max_length=75)
+    info = models.TextField()
 
     def __dir__(self):
         return [id, stage, description]
@@ -16,43 +17,44 @@ class Performances(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255)
     description = models.TextField()
-
     def __unicode__(self):
         return self.title
 
 class PerfTimes(models.Model):
     id = models.AutoField(primary_key=True)
     perf_id = models.ForeignKey('Performances')
-    stage_id = models.ForeignKey('Stages')
+    venue_id = models.ForeignKey('Stages')
     perfdate = models.DateField()
     perftime = models.TimeField()
 
     def __unicode__(self):
         return self.id
 
-class Persons(models.Model):
+class Personnel(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
     bio = models.TextField()
-
+    role = models.CharField(max_length=200)
+    image_URL = models.CharField(max_length=200)
+    perft_id = models.ForeignKey('PerfTimes')
     def __unicode__(self):
         return self.name
 
-class Actors(models.Model):
-    perft_id = models.ForeignKey('PerfTimes')
-    person_id = models.ForeignKey('Persons')
-    character = models.CharField(max_length=200)
+#class Actors(models.Model):
+#    perft_id = models.ForeignKey('PerfTimes')
+#    person_id = models.ForeignKey('Persons')
+#    character = models.CharField(max_length=200)
 
-    def __unicode__(self):
-        return self.character
+#    def __unicode__(self):
+#        return self.character
 
-class ProdCrew(models.Model):
-    perft_id = models.ForeignKey('PerfTimes')
-    person_id = models.ForeignKey('Persons')
-    position = models.CharField(max_length=200)
+#class ProdCrew(models.Model):
+#    perft_id = models.ForeignKey('PerfTimes')
+#    person_id = models.ForeignKey('Persons')
+#    position = models.CharField(max_length=200)
 
-    def __unicode__(self):
-        return self.position
+#    def __unicode__(self):
+#        return self.position
 
 from django import forms
 
