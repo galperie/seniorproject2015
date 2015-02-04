@@ -22,8 +22,8 @@ class Performances(models.Model):
 
 class PerfTimes(models.Model):
     id = models.AutoField(primary_key=True)
-    perf_id = models.ForeignKey('Performances')
-    venue_id = models.ForeignKey('Venues')
+    perf = models.ForeignKey('Performances')
+    venue = models.ForeignKey('Venues')
     perfdate = models.DateField()
     perftime = models.TimeField()
 
@@ -36,7 +36,7 @@ class Personnel(models.Model):
     bio = models.TextField()
     role = models.CharField(max_length=200)
     image_URL = models.CharField(max_length=200)
-    perft_id = models.ForeignKey('PerfTimes')
+    perft = models.ForeignKey('PerfTimes')
     def __unicode__(self):
         return self.name
 
