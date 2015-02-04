@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Venue(models.Model):
+class Venues(models.Model):
     id = models.AutoField(primary_key=True)
     building_name = models.CharField(max_length=50)
     stage_name = models.CharField(max_length=75)
@@ -23,7 +23,7 @@ class Performances(models.Model):
 class PerfTimes(models.Model):
     id = models.AutoField(primary_key=True)
     perf_id = models.ForeignKey('Performances')
-    venue_id = models.ForeignKey('Stages')
+    venue_id = models.ForeignKey('Venues')
     perfdate = models.DateField()
     perftime = models.TimeField()
 
